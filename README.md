@@ -7,71 +7,82 @@
 
 ## 1. Mapa conceptual — Componentes del sistema
 
-```mermaid
 mindmap
-  root((Sistema Multiagente<br>BrontoByte))
-    Dirección
-      orchestrator
-        Clasifica S/M/L
-        Delega con Agent tool
-        Consolida salida
-        Self-check 7 puntos
-    Diseño
-      optimizer
-        Simplificación previa
-        Detecta reuso
-      planner
-        Plan por fases
-        Dependencias
-        Criterios de éxito
-      researcher
-        Docs oficiales
-        Breaking changes
-        Patrones internos
-    Ejecución
-      implementer
-        Cambios mínimos
-        Respeta arquitectura
-      validator
-        Build+test+lint
-        Veredicto APTO/NO APTO
-      reviewer
-        Alineación objetivo
-        Mantenibilidad
-    Seguridad
-      secure-code-auditor
-        Caja blanca OWASP
-      dependency-and-build-auditor
-        Supply chain + CVEs
-      secrets-and-leak-detector
-        Fingerprints AIza/AKIA
-      blackbox-security-tester
-        Headers + cookies + TLS
-      threat-modeler
-        STRIDE + controles
-    Infra
-      Hooks
-        SessionStart
-        PreToolUse Write/Edit/Bash
-        PostToolUse
-        Stop
-      Slash Commands
-        /plan
-        /implement
-        /audit
-        /sec
-        /ship
-      MCPs
-        filesystem
-        github
-        playwright
-      Scripts
-        validate-handoff.py
-        install-security-tools.sh
-        stop-persist-log.sh
-```
+root((Sistema Multiagente<br>BrontoByte))
+Dirección
+orchestrator
+Clasifica S/M/L
+Delega con Agent tool
+Consolida salida
+Self-check 7 puntos
+Diseño
+optimizer
+Simplificación previa
+Detecta reuso
+planner
+Plan por fases
+Dependencias
+Criterios de éxito
+researcher
+Docs oficiales
+Breaking changes
+Patrones internos
+Ejecución
+implementer
+Cambios mínimos
+Respeta arquitectura
+validator
+Build+test+lint
+Veredicto APTO/NO APTO
+reviewer
+Alineación objetivo
+Mantenibilidad
+Seguridad
+secure-code-auditor
+Caja blanca OWASP
+dependency-and-build-auditor
+Supply chain + CVEs
+secrets-and-leak-detector
+Fingerprints AIza/AKIA
+blackbox-security-tester
+Headers + cookies + TLS
+threat-modeler
+STRIDE + controles
+Infra
+Hooks
+SessionStart
+PreToolUse Write/Edit/Bash
+PostToolUse
+Stop
+Slash Commands
+/plan
+/implement
+/audit
+/sec
+/ship
+MCPs
+filesystem
+github
+playwright
+Scripts
+validate-handoff.py
+install-security-tools.sh
+stop-persist-log.sh
 
----
+%% ==== ESTILOS ====
+classDef root fill:#e5e7eb,stroke:#111827,color:#111827;
+classDef direccion fill:#111827,stroke:#60a5fa,color:#ffffff;
+classDef diseno fill:#581c87,stroke:#c084fc,color:#ffffff;
+classDef ejecucion fill:#1f2937,stroke:#93c5fd,color:#ffffff;
+classDef seguridad fill:#78350f,stroke:#fbbf24,color:#ffffff;
+classDef infra fill:#7f1d1d,stroke:#f87171,color:#ffffff;
+
+%% aplicar clases (por texto)
+class Dirección direccion
+class Diseño diseno
+class Ejecución ejecucion
+class Seguridad seguridad
+class Infra infra
 
 ## 2. Fan-out paralelo de seguridad (Paso 5 en detalle)
 
