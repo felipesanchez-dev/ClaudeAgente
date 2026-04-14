@@ -73,39 +73,7 @@ mindmap
 
 ---
 
-## 2. Flujo de los 7 pasos obligatorios
-
-```mermaid
-flowchart TD
-    U[👤 Usuario envía tarea] --> ORCH{orchestrator<br>clasifica}
-    ORCH -->|S: trivial| DIRECT[Ejecución directa<br>pasos 2-3-7 colapsados]
-    ORCH -->|M/L| FLOW[Flujo completo]
-
-    FLOW --> P1[1️⃣ ANALIZAR<br>contexto, arquitectura, riesgos]
-    P1 --> P2[2️⃣ OPTIMIZAR + INVESTIGAR<br>en paralelo]
-    P2 --> P3[3️⃣ PLANEAR<br>planner → plan por fases]
-    P3 --> P4[4️⃣ IMPLEMENTAR<br>implementer por fase]
-    P4 --> P5[5️⃣ SEGURIDAD<br>fan-out paralelo]
-    P5 --> P6[6️⃣ VALIDAR<br>builds + tests + lint]
-    P6 --> DEC{¿validator<br>APTO?}
-    DEC -->|no| P4
-    DEC -->|sí| P7[7️⃣ CONSOLIDAR<br>reviewer + orchestrator]
-    P7 --> SELF{Self-check<br>7 preguntas}
-    SELF -->|falla| P6
-    SELF -->|ok| OUT[📤 Salida única<br>al usuario]
-    DIRECT --> OUT
-
-    classDef step fill:#e1f5ff,stroke:#0066cc,stroke-width:2px
-    classDef sec fill:#fff0e1,stroke:#cc6600,stroke-width:2px
-    classDef gate fill:#f0f0f0,stroke:#666,stroke-width:2px
-    class P1,P2,P3,P4,P6,P7 step
-    class P5 sec
-    class ORCH,DEC,SELF gate
-```
-
----
-
-## 3. Fan-out paralelo de seguridad (Paso 5 en detalle)
+## 2. Fan-out paralelo de seguridad (Paso 5 en detalle)
 
 ```mermaid
 flowchart LR
@@ -139,7 +107,7 @@ flowchart LR
 
 ---
 
-## 4. Ciclo de vida de un handoff
+## 3. Ciclo de vida de un handoff
 
 ```mermaid
 sequenceDiagram
@@ -169,7 +137,7 @@ sequenceDiagram
 
 ---
 
-## 5. Paralelismo — Matriz de co-ejecución
+## 4. Paralelismo — Matriz de co-ejecución
 
 ```mermaid
 gantt
@@ -207,7 +175,7 @@ gantt
 
 ---
 
-## 6. Flujo de hooks — ¿cuándo se disparan?
+## 5. Flujo de hooks — ¿cuándo se disparan?
 
 ```mermaid
 flowchart TD
@@ -243,7 +211,7 @@ flowchart TD
 
 ---
 
-## 7. Slash commands — Atajos disponibles
+## 6. Slash commands — Atajos disponibles
 
 ```mermaid
 flowchart LR
@@ -270,7 +238,7 @@ flowchart LR
 
 ---
 
-## 8. Arquitectura de archivos
+## 7. Arquitectura de archivos
 
 ```
 .claude/
@@ -337,7 +305,7 @@ Memoria global de usuario:
 
 ---
 
-## 9. Modelo de decisión del orchestrator
+## 8. Modelo de decisión del orchestrator
 
 ```mermaid
 flowchart TD
@@ -371,7 +339,7 @@ flowchart TD
 
 ---
 
-## 10. Ciclo de retroalimentación y autocorrección
+## 9. Ciclo de retroalimentación y autocorrección
 
 ```mermaid
 stateDiagram-v2
@@ -406,9 +374,9 @@ stateDiagram-v2
 
 ---
 
-## 11. Ejemplo real — Tarea M paso a paso
+## 10. Ejemplo real — Tarea M paso a paso
 
-**Usuario:** *"Agrega endpoint `/api/users/me` que devuelva el perfil autenticado."*
+**Usuario:** _"Agrega endpoint `/api/users/me` que devuelva el perfil autenticado."_
 
 ```mermaid
 journey
@@ -437,23 +405,23 @@ journey
 
 ---
 
-## 12. Glosario rápido
+## 11. Glosario rápido
 
-| Término | Definición |
-|---|---|
-| **Orchestrator** | Agente director único punto de entrada. Nunca implementa en M/L, siempre delega. |
-| **Hand-off** | Bloque YAML entre `---agent-handoff---` y `---end-handoff---` que todo subagente emite al terminar. |
-| **Fan-out** | Lanzamiento paralelo de múltiples subagentes en un solo mensaje. |
-| **S/M/L** | Clasificación de tamaño: Small (trivial), Medium (3-8 pasos), Large (auditoría/feature). |
-| **STRIDE** | Marco de amenazas: Spoofing, Tampering, Repudiation, Information disclosure, DoS, Elevation of privilege. |
-| **Self-check 7 puntos** | Preguntas internas del orchestrator antes de cerrar M/L. |
-| **`_pending.md`** | Buffer del turno actual; el hook Stop lo archiva con timestamp. |
-| **BFF** | Backend-for-Frontend; patrón usado para ocultar IA/servicios externos al cliente. |
-| **Harness** | Infraestructura ejecutable (no solo doc) que fuerza el flujo: hooks + validador + logs. |
+| Término                 | Definición                                                                                                |
+| ----------------------- | --------------------------------------------------------------------------------------------------------- |
+| **Orchestrator**        | Agente director único punto de entrada. Nunca implementa en M/L, siempre delega.                          |
+| **Hand-off**            | Bloque YAML entre `---agent-handoff---` y `---end-handoff---` que todo subagente emite al terminar.       |
+| **Fan-out**             | Lanzamiento paralelo de múltiples subagentes en un solo mensaje.                                          |
+| **S/M/L**               | Clasificación de tamaño: Small (trivial), Medium (3-8 pasos), Large (auditoría/feature).                  |
+| **STRIDE**              | Marco de amenazas: Spoofing, Tampering, Repudiation, Information disclosure, DoS, Elevation of privilege. |
+| **Self-check 7 puntos** | Preguntas internas del orchestrator antes de cerrar M/L.                                                  |
+| **`_pending.md`**       | Buffer del turno actual; el hook Stop lo archiva con timestamp.                                           |
+| **BFF**                 | Backend-for-Frontend; patrón usado para ocultar IA/servicios externos al cliente.                         |
+| **Harness**             | Infraestructura ejecutable (no solo doc) que fuerza el flujo: hooks + validador + logs.                   |
 
 ---
 
-## 13. Resumen ejecutivo del flujo
+## 12. Resumen ejecutivo del flujo
 
 1. **Usuario** escribe tarea (o usa `/audit`, `/plan`, etc.).
 2. **Orchestrator** clasifica S/M/L y ejecuta el flujo de 7 pasos.
